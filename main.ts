@@ -28,6 +28,7 @@ while (!stopLoop) {
 
   switch (answers.select) {
     case "add":
+      // Prompt the user to select an item to add
         const addtodos = await inquirer.prompt({
             type: "input",
             name: "TODO",
@@ -37,34 +38,47 @@ while (!stopLoop) {
           console.log(addtodos, todos);
           break;
         case "update":
+          // Prompt the user to select an item to update
           const updateTodo = await inquirer.prompt({
             type: "list",
             name: "TODO",
             message: "Select items to update",
             choices: todos.map((item) => item)
           });
+
+          // Prompt the user to enter the updated item
+
           const addTodo = await inquirer.prompt({
             type: "input",
             name: "TODO",
             message: "Add items.."
           });
-          const newTodos = todos.filter((val) => val!== updateTodo.todo);
-          todos = [...newTodos, addTodo.TODO];
-          console.log(todos);
-          break;
+
+          // Create a new array that includes the updated item
+           const newTodos = todos.filter((todo) => todo!== updateTodo.todo);
+            newTodos.push(addTodo.TODO);
+
+            console.log(`Updated todos: ${newTodos}`);
+            break;
+
         case "read":
           console.log(todos);
           break;
+
         case "delete":
-          const deleteTodo = await inquirer.prompt({
+        // Prompt the user to select an item to delete
+
+        const deleteTodo = await inquirer.prompt({
             type: "list",
-            name: "TODO",
-            message: "Select items to delete",
-            choices: todos.map((item) => item)
+            name: "todo",
+            message: "Select an item to delete:",
+            choices: todos,
           });
-          const removeTodo = todos.filter((val) => val!== deleteTodo.todo);
-          todos = [...removeTodo];
-          console.log(todos);
+          
+          // Create a new array that excludes the selected item
+          const filteredTodos = todos.filter((todo) => todo!== deleteTodo.todo);
+          
+          console.log(`Remaining todos: ${filteredTodos}`);
           break;
         case "exit":
           stopLoop = true;
