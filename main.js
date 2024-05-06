@@ -48,19 +48,16 @@ while (!stopLoop) {
                 message: "Add items.."
             });
             // Create a new array that includes the updated item
-            // const newTodos = todos.filter((todo) => todo!== updateTodo.todo);
-            // // todos = [...newTodos, addTodo.TODO];
-            // newTodos.push(addTodo.todo);
-            // console.log(`updated todos: ${todos}`);
-            // // console.log(todos);
-            const newTodos = todos.filter((todo) => todo !== updateTodo.todo);
+            const newTodos = todos.filter((TODO) => TODO !== updateTodo.TODO);
             newTodos.push(addTodo.TODO);
+            todos = [...newTodos, addTodo.TODO];
             console.log(`Updated todos: ${newTodos}`);
             break;
         case "read":
             console.log(todos);
             break;
         case "delete":
+            // Prompt the user to select an item to delete
             const deleteTodo = await inquirer.prompt({
                 type: "list",
                 name: "todo",
@@ -69,6 +66,7 @@ while (!stopLoop) {
             });
             // Create a new array that excludes the selected item
             const filteredTodos = todos.filter((todo) => todo !== deleteTodo.todo);
+            todos = [...filteredTodos];
             console.log(`Remaining todos: ${filteredTodos}`);
             break;
         case "exit":

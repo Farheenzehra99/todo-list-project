@@ -55,9 +55,9 @@ while (!stopLoop) {
           });
 
           // Create a new array that includes the updated item
-           const newTodos = todos.filter((todo) => todo!== updateTodo.todo);
+           const newTodos = todos.filter((TODO) => TODO!== updateTodo.TODO);
             newTodos.push(addTodo.TODO);
-
+           todos = [...newTodos,addTodo.TODO];
             console.log(`Updated todos: ${newTodos}`);
             break;
 
@@ -76,8 +76,8 @@ while (!stopLoop) {
           });
           
           // Create a new array that excludes the selected item
-          const filteredTodos = todos.filter((todo) => todo!== deleteTodo.todo);
-          
+          const filteredTodos = todos.filter((todo) => todo !== deleteTodo.todo);
+          todos = [...filteredTodos ];
           console.log(`Remaining todos: ${filteredTodos}`);
           break;
         case "exit":
